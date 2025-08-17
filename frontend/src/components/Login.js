@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', formData);
+      const response = await axios.post(`${config.API_URL}/api/auth/login`, formData);
       setMessage(response.data.message);
       localStorage.setItem('email', formData.email);
       navigate('/verify-otp');

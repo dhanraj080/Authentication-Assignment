@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ const Dashboard = () => {
 
   const fetchProfileImage = async (token) => {
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/profile-image', {
+      const response = await axios.get(`${config.API_URL}/api/auth/profile-image`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       });
@@ -38,7 +39,7 @@ const Dashboard = () => {
     if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete('http://localhost:3000/api/auth/delete-account', {
+        await axios.delete(`${config.API_URL}/api/auth/delete-account`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         

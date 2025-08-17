@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const Register = () => {
     formDataToSend.append('profileImage', profileImage);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/register', formDataToSend, {
+      const response = await axios.post(`${config.API_URL}/api/auth/register`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
